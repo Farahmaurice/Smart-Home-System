@@ -1,9 +1,3 @@
-/*
- * GccApplication1.c
- *
- * Created: 9/10/2023 11:50:15 AM
- * Author : Mariam
- */ 
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -18,7 +12,6 @@
 u8 *U8_EnterPassword();
 void Vid_SayHi();
 void Vid_SayNo();
-void Vid_ShowPassword(u8 *test);
 u8 Bool_CheckPassword(u8 *p);
 void Vid_Alarm();
 void Vid_OpenDoor();
@@ -112,27 +105,6 @@ void Vid_SayNo()
 	LCD_vidPrintString("Try Again!");
 }
 
-void Vid_ShowPassword(u8 *test)
-{
-	LCD_vidSendCmd(0x01);
-	
-	
-	if(Bool_CheckPassword(test) == 0)
-	{
-		LCD_vidPrintString("Password Wrong !");
-		LCD_vidMoveCursor(1,0);
-		LCD_vidPrintString("Try Again!");
-	}
-	
-	else if(Bool_CheckPassword(test) == 1)
-	{
-		LCD_vidPrintString("Welcome At Home Dear..!");
-		// Open Door:
-		Vid_OpenDoor();
-		UART_vidSendData(1);
-	}
-	
-}
 
 u8 Bool_CheckPassword(u8 *p)
 {
